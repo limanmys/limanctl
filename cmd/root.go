@@ -3,6 +3,8 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"os/exec"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -24,4 +26,17 @@ func Execute() {
 
 func init() {
 	rootCmd.CompletionOptions.DisableDefaultCmd = true
+	out, err := exec.Command("id", "-u").Output()
+	if err != nil {
+		if _, ok := err.(*exec.ExitError); ok {
+			//fmt.Printf("systemctl finished with non-zero: %v\n", exitErr)
+		} else {
+			fmt.Printf("failed to run id -u: %v", err)
+			os.Exit(1)
+		}
+	}
+	if strings.TrimSpace(string(out)) != "0" {
+		fmt.Println("You must run Limanctl as sudo/root")
+		os.Exit(1)
+	}
 }

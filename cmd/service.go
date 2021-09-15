@@ -17,8 +17,7 @@ func checkServices() {
 	success := true
 
 	for _, service := range ServiceList {
-		cmd := exec.Command("systemctl", "check", service)
-		out, err := cmd.CombinedOutput()
+		out, err := exec.Command("systemctl", "check", service).Output()
 		if err != nil {
 			if _, ok := err.(*exec.ExitError); ok {
 				//fmt.Printf("systemctl finished with non-zero: %v\n", exitErr)

@@ -13,8 +13,8 @@ func init() {
 var (
 	versionCmd = &cobra.Command{
 		Use:   "version",
-		Short: "Version of Limanctl",
-		Long:  "LimanMYS Control CLI interface version number",
+		Short: "Version of Liman",
+		Long:  "LimanMYS version number",
 		Run: func(cmd *cobra.Command, args []string) {
 			fmt.Println("version 0.1")
 		},
