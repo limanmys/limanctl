@@ -34,8 +34,8 @@ var (
 
 	dbStatus = &cobra.Command{
 		Use:   "check-database",
-		Short: "Check if database is working of Liman MYS",
-		Long:  "Check if database is working of Liman MYS",
+		Short: "Check if Liman MYS database is working",
+		Long:  "Check if Liman MYS database is working",
 		Run: func(cmd *cobra.Command, args []string) {
 			checkDbStatus()
 		},
