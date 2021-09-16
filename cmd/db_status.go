@@ -13,7 +13,7 @@ func init() {
 }
 
 func checkDbStatus() {
-	isAlive, err := helpers.CheckIfAlive(conn[0], conn[1], conn[2], conn[3], conn[4])
+	isAlive, err := helpers.CheckIfAlive()
 
 	if !isAlive {
 		fmt.Println("PostgreSQL is working properly.")
@@ -24,16 +24,8 @@ func checkDbStatus() {
 }
 
 var (
-	conn = []string{
-		helpers.GetKey("DB_HOST"),
-		helpers.GetKey("DB_PORT"),
-		helpers.GetKey("DB_USERNAME"),
-		helpers.GetKey("DB_PASSWORD"),
-		helpers.GetKey("DB_DATABASE"),
-	}
-
 	dbStatus = &cobra.Command{
-		Use:   "check-database",
+		Use:   "database",
 		Short: "Check if Liman MYS database is working",
 		Long:  "Check if Liman MYS database is working",
 		Run: func(cmd *cobra.Command, args []string) {

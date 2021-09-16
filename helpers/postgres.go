@@ -1,27 +1,52 @@
 package helpers
 
 import (
-	"database/sql"
 	"fmt"
+	"log"
 	"strconv"
 
 	_ "github.com/lib/pq"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
-func CheckIfAlive(ip string, port string, username string, password string, database string) (bool, error) {
-	port_, _ := strconv.Atoi(port)
-	connectionQuery := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", ip, port_, username, password, database)
+type DB struct {
+	Ip       string
+	Port     string
+	Username string
+	Password string
+	Database string
+}
 
-	db, err := sql.Open("postgres", connectionQuery)
+var Db = connectGorm()
+
+func ConnectionQuery() string {
+	conn := GetDbInfo()
+
+	port, _ := strconv.Atoi(conn.Port)
+	connectionQuery := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", conn.Ip, port, conn.Username, conn.Password, conn.Database)
+
+	return connectionQuery
+}
+
+func connectGorm() *gorm.DB {
+	gormDB, err := gorm.Open(postgres.Open(ConnectionQuery()), &gorm.Config{
+		// Log bastırmak istemediğimizde bu kısmı açacaz
+		// Logger: logger.Default.LogMode(logger.Silent),
+	})
 	if err != nil {
-		return false, err
+		log.Fatal(err)
 	}
 
-	defer db.Close()
+	return gormDB
+}
 
-	err = db.Ping()
+func CheckIfAlive() (bool, error) {
+	db, _ := Db.DB()
+
+	err := db.Ping()
 	if err == nil {
-		fmt.Printf("Connected successfully to %s:%s\n", ip, port)
+		fmt.Printf("Connected successfully to %s:%s\n", GetDbInfo().Ip, GetDbInfo().Port)
 	}
 
 	return err != nil, err
