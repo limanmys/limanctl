@@ -5,7 +5,7 @@ type User struct {
 	ID            string   `json:"id"`
 	Name          string   `json:"name"`
 	Email         string   `json:"email"`
-	Password      string   `json:"password" gorm:"->:false;<-:update"`
+	Password      string   `json:"password" gorm:"->:false;<-:update,create"`
 	Status        int      `json:"status"`
 	LastLoginAt   string   `json:"last_login_at"`
 	RememberToken string   `json:"remember_token" gorm:"->:false;<-:create"`

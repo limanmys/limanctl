@@ -8,11 +8,12 @@ import (
 	_ "github.com/lib/pq"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 var DB = connectGorm()
 
-func ConnectionQuery() string {
+func connectionQuery() string {
 	conn := GetDbInfo()
 
 	port, _ := strconv.Atoi(conn[1])
@@ -22,9 +23,9 @@ func ConnectionQuery() string {
 }
 
 func connectGorm() *gorm.DB {
-	gormDB, err := gorm.Open(postgres.Open(ConnectionQuery()), &gorm.Config{
+	gormDB, err := gorm.Open(postgres.Open(connectionQuery()), &gorm.Config{
 		// Log bastırmak istemediğimizde bu kısmı açacaz
-		// Logger: logger.Default.LogMode(logger.Silent),
+		Logger: logger.Default.LogMode(logger.Silent),
 	})
 	if err != nil {
 		log.Fatal(err)

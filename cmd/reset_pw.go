@@ -29,6 +29,7 @@ func resetPassword(args []string) {
 	password, _ := password.Generate(16, 8, 8, true, true)
 
 	user.Password = helpers.MakeHash(password)
+	user.RememberToken = ""
 	user.ForceChange = true
 
 	result := db.Save(&user)
