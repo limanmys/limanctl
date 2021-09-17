@@ -33,7 +33,7 @@ func listUsers() {
 			userType = "User"
 		}
 		table.Append([]string{
-			userType, v.Name, v.Email, v.LastLoginAt, v.LastLoginIP, v.AuthType,
+			userType, v.Name, v.Email, v.LastLoginAt.String, v.LastLoginIP.String, v.AuthType,
 		})
 	}
 

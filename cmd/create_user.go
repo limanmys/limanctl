@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"database/sql"
 	"log"
 	"strings"
 	"time"
@@ -33,17 +34,13 @@ func createUser(args []string) {
 	}
 
 	password, _ := password.Generate(16, 8, 8, true, true)
-	datetime := time.Now().Format(time.RFC3339)
 
 	user = models.User{
 		ID:          uuid.New().String(),
 		Name:        "New User",
 		Email:       args[0],
 		Password:    helpers.MakeHash(password),
-		CreatedAt:   datetime,
-		UpdatedAt:   datetime,
-		LastLoginAt: datetime,
-		LastLoginIP: "0.0.0.0",
+		CreatedAt:   sql.NullString{String: time.Now().Format(time.RFC3339), Valid: true},
 		ForceChange: true,
 		Status:      1,
 		AuthType:    "local",
