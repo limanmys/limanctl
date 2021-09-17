@@ -1,9 +1,9 @@
 package cmd
 
 import (
-	"fmt"
 	"log"
 
+	"github.com/fatih/color"
 	"github.com/limanmys/limanctl/helpers"
 	"github.com/spf13/cobra"
 )
@@ -16,9 +16,9 @@ func checkDbStatus() {
 	isAlive, err := helpers.CheckIfAlive()
 
 	if !isAlive {
-		fmt.Println("PostgreSQL is working properly.")
+		color.Green("PostgreSQL is working properly.")
 	} else {
-		fmt.Println("PostgreSQL is NOT working properly.")
+		color.Red("PostgreSQL is NOT working properly.")
 		log.Fatal(err)
 	}
 }

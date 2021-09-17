@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	"strings"
 
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -29,14 +30,16 @@ func checkServices() {
 
 		if strings.TrimSpace(string(out)) == "inactive" {
 			success = false
+			color.Red("%s status is %s", service, strings.TrimSpace(string(out)))
+		} else {
+			color.Green("%s status is %s", service, strings.TrimSpace(string(out)))
 		}
-		fmt.Printf("%s status is %s", service, string(out))
 	}
 
 	if success {
-		fmt.Println("\nAll services working as intended.")
+		color.Green("\nAll services working as intended.")
 	} else {
-		fmt.Println("\nSome services is not working, Liman might not serve properly.")
+		color.Yellow("\nSome services is not working, Liman might not serve properly.")
 	}
 }
 

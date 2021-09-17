@@ -10,21 +10,13 @@ import (
 	"gorm.io/gorm"
 )
 
-type DB struct {
-	Ip       string
-	Port     string
-	Username string
-	Password string
-	Database string
-}
-
-var Db = connectGorm()
+var DB = connectGorm()
 
 func ConnectionQuery() string {
 	conn := GetDbInfo()
 
-	port, _ := strconv.Atoi(conn.Port)
-	connectionQuery := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", conn.Ip, port, conn.Username, conn.Password, conn.Database)
+	port, _ := strconv.Atoi(conn[1])
+	connectionQuery := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", conn[0], port, conn[2], conn[3], conn[4])
 
 	return connectionQuery
 }
@@ -42,11 +34,12 @@ func connectGorm() *gorm.DB {
 }
 
 func CheckIfAlive() (bool, error) {
-	db, _ := Db.DB()
+	db, _ := DB.DB()
 
 	err := db.Ping()
+	info := GetDbInfo()
 	if err == nil {
-		fmt.Printf("Connected successfully to %s:%s\n", GetDbInfo().Ip, GetDbInfo().Port)
+		fmt.Printf("Connected successfully to %s:%s\n", info[0], info[1])
 	}
 
 	return err != nil, err

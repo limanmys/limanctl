@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	"strings"
 
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -31,12 +32,12 @@ func init() {
 		if _, ok := err.(*exec.ExitError); ok {
 			//fmt.Printf("systemctl finished with non-zero: %v\n", exitErr)
 		} else {
-			fmt.Printf("failed to run id -u: %v", err)
+			color.Red("failed to run id -u: %v", err)
 			os.Exit(1)
 		}
 	}
 	if strings.TrimSpace(string(out)) != "0" {
-		fmt.Println("You must run Limanctl as sudo/root")
+		color.Red("You must run Limanctl as sudo/root")
 		os.Exit(1)
 	}
 }

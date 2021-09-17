@@ -19,7 +19,7 @@ func resetPassword(args []string) {
 		log.Fatal("Please provide e-mail address.")
 	}
 
-	db := helpers.Db
+	db := helpers.DB
 
 	var user models.User
 	if result := db.First(&user, "email = ?", args[0]); result.Error != nil {
@@ -43,9 +43,9 @@ func resetPassword(args []string) {
 
 var (
 	resetPwCmd = &cobra.Command{
-		Use:   "reset-password",
-		Short: "Version of Liman",
-		Long:  "LimanMYS version number",
+		Use:   "reset",
+		Short: "Reset a Liman user's password, requires [email] argument",
+		Long:  "Reset a Liman user's password, requires [email] argument, example usage: sudo limanctl reset-password administrator@liman.dev",
 		Run: func(cmd *cobra.Command, args []string) {
 			resetPassword(args)
 		},

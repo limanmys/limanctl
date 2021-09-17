@@ -10,12 +10,12 @@ func GetKey(key string) string {
 	return dotenv[key]
 }
 
-func GetDbInfo() DB {
-	return DB{
-		Ip:       GetKey("DB_HOST"),
-		Port:     GetKey("DB_PORT"),
-		Username: GetKey("DB_USERNAME"),
-		Password: GetKey("DB_PASSWORD"),
-		Database: GetKey("DB_DATABASE"),
+func GetDbInfo() []string {
+	return []string{
+		GetKey("DB_HOST"),
+		GetKey("DB_PORT"),
+		GetKey("DB_USERNAME"),
+		GetKey("DB_PASSWORD"),
+		GetKey("DB_DATABASE"),
 	}
 }
