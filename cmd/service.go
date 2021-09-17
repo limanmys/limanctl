@@ -59,5 +59,6 @@ var (
 		"liman-system",
 		"liman-vnc",
 		"liman-webssh",
+		"nginx",
 	}
 )
