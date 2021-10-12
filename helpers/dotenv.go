@@ -1,11 +1,21 @@
 package helpers
 
 import (
+	"log"
+	"os"
+
+	"github.com/fatih/color"
 	"github.com/joho/godotenv"
 )
 
 func GetKey(key string) string {
-	dotenv, _ := godotenv.Read("/liman/server/.env")
+	dotenv, err := godotenv.Read("/liman/server/.env")
+
+	if err != nil {
+		color.Red("You must run Limanctl as sudo/root")
+		log.Fatal(err)
+		os.Exit(1)
+	}
 
 	return dotenv[key]
 }
