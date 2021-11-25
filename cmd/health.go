@@ -19,6 +19,8 @@ var (
 			checkServices()
 			fmt.Println(" \n --- \n ")
 			checkDbStatus()
+			fmt.Println(" \n --- \n ")
+			checkCertificate()
 		},
 	}
 )
