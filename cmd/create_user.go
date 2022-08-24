@@ -59,8 +59,8 @@ func createUser(args []string) {
 var (
 	createUserCmd = &cobra.Command{
 		Use:   "create-user",
-		Short: "Create new Liman user, needs [email] arg",
-		Long:  "Create new Liman user, needs [email] arg",
+		Short: "Create new Liman user, needs email argument",
+		Long:  "Create new Liman user, needs email argument",
 		Run: func(cmd *cobra.Command, args []string) {
 			createUser(args)
 		},

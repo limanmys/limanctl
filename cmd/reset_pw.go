@@ -45,8 +45,8 @@ func resetPassword(args []string) {
 var (
 	resetPwCmd = &cobra.Command{
 		Use:   "reset",
-		Short: "Reset a Liman user's password, requires [email] argument",
-		Long:  "Reset a Liman user's password, requires [email] argument, example usage: sudo limanctl reset-password administrator@liman.dev",
+		Short: "Reset a Liman user's password, requires email argument",
+		Long:  "Reset a Liman user's password, requires email argument, example usage: sudo limanctl reset-password administrator@liman.dev",
 		Run: func(cmd *cobra.Command, args []string) {
 			resetPassword(args)
 		},
