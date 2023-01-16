@@ -60,5 +60,6 @@ var (
 		"liman-vnc",
 		"liman-webssh",
 		"nginx",
+		"redis",
 	}
 )
