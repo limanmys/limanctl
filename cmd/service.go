@@ -47,7 +47,7 @@ var (
 	serviceCmd = &cobra.Command{
 		Use:   "service",
 		Short: "Checks health of Liman services",
-		Long:  "Checks health of Liman services (render, webssh, system helper...)",
+		Long:  "Checks health of Liman services (render, ssh, system helper...)",
 		Run: func(cmd *cobra.Command, args []string) {
 			checkServices()
 		},
@@ -57,8 +57,6 @@ var (
 		"liman-render",
 		"liman-socket",
 		"liman-system",
-		"liman-vnc",
-		"liman-webssh",
 		"nginx",
 		"redis",
 	}
