@@ -54,6 +54,7 @@ var (
 	}
 
 	ServiceList = []string{
+		"liman-ui",
 		"liman-render",
 		"liman-socket",
 		"liman-system",
