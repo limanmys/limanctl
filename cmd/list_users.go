@@ -23,7 +23,7 @@ func listUsers() {
 	}
 
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"User Type", "Name", "E-mail", "Last Login At", "Last Login IP", "Auth Type"})
+	table.SetHeader([]string{"User Type", "Name", "E-mail", "Last Login IP", "Auth Type"})
 
 	for _, v := range users {
 		var userType string
@@ -33,7 +33,7 @@ func listUsers() {
 			userType = "User"
 		}
 		table.Append([]string{
-			userType, v.Name, v.Email, v.LastLoginAt.String, v.LastLoginIP.String, v.AuthType,
+			userType, v.Name, v.Email, v.LastLoginIP.String, v.AuthType,
 		})
 	}
 

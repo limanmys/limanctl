@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"log"
+	"time"
 
 	"github.com/fatih/color"
 	"github.com/google/uuid"
@@ -28,6 +29,8 @@ func administrator() {
 		Status:        1,
 		ForceChange:   true,
 		AuthType:      "local",
+		SessionTime:   -1,
+		LastLoginAt:   time.Now(),
 	}
 
 	result := db.Create(&user)
